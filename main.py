@@ -6,11 +6,16 @@ from itertools import chain
 import operator
 
 
-def ConvertToInt(message_str):
-  res = 0
-  for i in range(len(message_str)):
-    res = res * 256 + ord(message_str[i])
-  return res
+def ConvertToInt(message):
+    theNumber = "1"
+    for m in message:
+        theASCII = str(ord(m))
+        if len(theASCII) == 1:
+            theASCII = "00"+theASCII
+        elif len(theASCII) == 2:
+            theASCII = "0"+theASCII
+        theNumber += theASCII
+    return int(theNumber)
 
 
 
@@ -106,12 +111,14 @@ def Decrypt(ciphertext, p, q, exponent):
   return ConvertToStr(PowMod(ciphertext, d, n))
 
 
-def ConvertToStr(n):
-    res = ""
-    while n > 0:
-        res += chr(n % 256)
-        n //= 256
-    return res[::-1]
+def ConvertToStr(numbers):
+    numbers = str(numbers)
+    numbers = numbers[1:]
+    theMessageList = [numbers[i:i+3] for i in range(0, len(numbers), 3)]
+    theMessage = ""
+    for tml in theMessageList:
+        theMessage += chr(int(tml))
+    return theMessage
 
 
 def Decrypt_Dat():
