@@ -176,7 +176,7 @@ def home():
         msvcrt.getch()
         home()
 
-def Help_Me:
+def Help_Me():
     clear()
     print("\n\n*************************Help*************************\n")
     print("The RSA Algorithm works on 2 important principles:")
